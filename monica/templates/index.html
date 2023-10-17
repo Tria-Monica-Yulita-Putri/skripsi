@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Rekomendasi SMP Negeri</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/564x/d2/09/c9/d209c9fb3cc085beefef755df27b035a.jpg')
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .form-container {
+      background-color: #dcf5fd;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+      margin-bottom: 30px;
+    }
+
+    .form-container button {
+      margin-top: 20px;
+    }
+
+    .result-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .result-container h2 {
+      margin-bottom: 20px;
+    }
+
+    .result-container ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .result-container ul li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+
+<div class="container">
+  <div class="header">
+    <h2 class="mt-4"
+      style="color: #000000; font-size: 50px; text-align: center; text-shadow: 2px 2px 4px rgba(236, 201, 215, 0.354);">
+      Sistem Rekomendasi SMP Negeri Surabaya</h2>
+  </div>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <a class="navbar-brand font-weight-bold" href="/">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/">
+          <h2>Home</h2><span class="sr-only">(current)</span>
+        </a>
+        <a class="nav-item nav-link active" href="/rekomendasi">
+          <h2>Rekomendasi</h2>
+        </a>
+      </div>
+    </div>
+  </nav>
+</body>
+
+  <div class="container">
+    <div class="header">
+      <img src="https://i.pinimg.com/564x/ad/a9/11/ada91176ac82cec2ed3aece460a394cc.jpg" alt="gambar" width="900"
+        height="500" class="mt-4">
+    </div>
+
+    <div class="form-container">
+      <h2 class="mt-4"
+        style="color: #000000; font-size: 40px; text-align: center; text-shadow: 2px 2px 4px rgba(236, 201, 215, 0.354);">
+        Input Nilai dan Alamat Siswa</h2>
+      <form action="/cekrekomendasi" method="POST">
+        <div class="form-group">
+          <label for="rata-mtk" style="font-weight: bold; color: #333;">Rata-rata Matematika:</label>
+          <input type="text" name="mtk" class="form-control" placeholder=" Masukkan Rata Nilai Matematika"
+            style="border-color: #ccc; border-radius: 4px; padding: 8px;" required>
+        </div>
+
+        <div class="form-group">
+          <label for="rata-indo" style="font-weight: bold; color: #333;">Rata-rata Bahasa Indonesia:</label>
+          <input type="text" name="bhs_indo" class="form-control" placeholder="Masukkan Rata Nilai Bahasa Indonesia"
+            style="border-color: #ccc; border-radius: 4px; padding: 8px;" required>
+        </div>
+
+        <div class="form-group">
+          <label for="rata-ipa" style="font-weight: bold; color: #333;">Rata-rata IPA:</label>
+          <input type="text" name="ipa" class="form-control" placeholder="Masukkan Rata Nilai IPA"
+            style="border-color: #ccc; border-radius: 4px; padding: 8px;" required>
+        </div>
+
+        <div class="form-group">
+          <label for="alamat" style="font-weight: bold; color: #333;">Alamat Rumah:</label>
+          <input type="text" name="address" class="form-control" placeholder="Masukkan Alamat"
+            style="border-color: #ccc; border-radius: 4px; padding: 8px;">
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block">Rekomendasi</button>
+      </form>
+      <br>
+      <div>
+        {% if result %}
+        <h2>Hasil Rekomendasi:</h2>
+        <p>{{ result }}</p>
+        {% if recommended_smp_pred %}
+        <h3>Daftar Rekomendasi SMP Negeri:</h3>
+        <ol>
+          {% for jarak, smp in recommended_smp_pred %}
+          <li>{{ smp }} (Jarak: {{ jarak }})</li>
+          {% endfor %}
+        </ol>
+        {% endif %}
+        {% endif %}
+      </div>
+      </form>
+    </div>
+</body>
+
+</html>
